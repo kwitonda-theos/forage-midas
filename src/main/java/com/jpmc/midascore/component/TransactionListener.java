@@ -20,9 +20,9 @@ public class TransactionListener {
      * Spring Kafka resolves the topic name from application.yml so the listener stays
      * configurable instead of hard-coding the topic in source code.
      */
-    @KafkaListener(topics = "${general.kafka-topic}")
+    @KafkaListener(topics = "${general.kafka-topic}", groupId = "midas-core-group")
     public void listen(Transaction transaction) {
         // The message is already deserialized into the domain type, so we only log it here.
-        logger.debug("Received transaction from Kafka: {}", transaction);
+        logger.info("Received transaction from Kafka: {}", transaction.toString());
     }
 }
